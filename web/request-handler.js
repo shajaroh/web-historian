@@ -15,33 +15,33 @@ exports.handleRequest = function (req, res) {
   var statusCode = 404;
   
 
-  if (req.method === 'GET') {
-    if (req.url === '/') {
-      var content = path.join(__dirname, '/public/index.html');
-      fs.readFile(content, (err, data) => {
-        if (err) throw err;
-        console.log(data);
-        statusCode = 200;
-        res.writeHead(statusCode, 'Roger, Roger', headers); 
-        res.end(data);     
-      });
-    } else {
-      //figure out if URL is in list and/or is archived
-      //if it doesn't exist, add to URl list
+  // if (req.method === 'GET') {
+  //   if (req.url === '/') {
+  //     var content = path.join(__dirname, '/public/index.html');
+  //     fs.readFile(content, (err, data) => {
+  //       if (err) throw err;
+  //       console.log(data);
+  //       statusCode = 200;
+  //       res.writeHead(statusCode, 'Roger, Roger', headers); 
+  //       res.end(data);     
+  //     });
+  //   } else {
+  //     //figure out if URL is in list and/or is archived
+  //     //if it doesn't exist, add to URl list
       
-      if() {
-      //if it does exist, read file of that url and res.end(data)
-        var content = path.join(__dirname, '../archives/sites');
-        content = content + req.url;
-        fs.readFile(content, (err, data) => {
-          if (err) throw err;
-          console.log(data);
-          statusCode = 200;
-          res.writeHead(statusCode, 'Roger, Roger', headers); 
-          res.end(data);  
-        }
-    }
-  }
+  //     if() {
+  //     //if it does exist, read file of that url and res.end(data)
+  //       var content = path.join(__dirname, '../archives/sites');
+  //       content = content + req.url;
+  //       fs.readFile(content, (err, data) => {
+  //         if (err) throw err;
+  //         console.log(data);
+  //         statusCode = 200;
+  //         res.writeHead(statusCode, 'Roger, Roger', headers); 
+  //         res.end(data);  
+  //       }
+  //   }
+  // }
 
   //res.end(archive.paths.list);
   //res.end();

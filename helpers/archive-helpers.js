@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
+var http = require('http');
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -26,24 +27,44 @@ exports.initialize = function(pathsObj) {
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(callback) {
-  return fs.readFile(this.paths.list, 'utf8', (err, data) => {
+  fs.readFile(this.paths.list, 'utf8', (err, data) => {
     if (err) throw err;
     console.log(data);
     var urlArr = data.split('\n');
-    return callback(urlArr);
+    callback(urlArr);
   });
 
 };
 
-exports.isUrlInList = function(url, callback) {
+exports.isUrlInList = (url, callback) => {
+
+  this.readListOfUrls(function(array) {
+    callback(array.includes(url));
+  });
   
 };
 
 exports.addUrlToList = function(url, callback) {
+  fs.writeFile(this.paths.list, url, (err, data) => {
+    if (err) throw err;
+    console.log(data);
+    callback();
+  });
+
 };
 
 exports.isUrlArchived = function(url, callback) {
+  //callback(fs.existsSync(this.paths.archivedSites.join(url)));
+  //var filePath = '../test/testdata/sites/';
+  fs.readdir(this.paths.archivedSites, (err, files) => {
+    if (err) {
+      console.log('it\'s not here!');
+      throw error;
+    } 
+    callback(files.includes(url));
+  });
 };
 
 exports.downloadUrls = function(urls) {
+
 };

@@ -66,5 +66,10 @@ exports.isUrlArchived = function(url, callback) {
 };
 
 exports.downloadUrls = function(urls) {
-  
+  urls.forEach(function(url) {
+    var file = fs.createWriteStream(url);
+    var request = http.get('http://' + url, function(response) {
+      response.pipe(file);
+    });
+  });
 };
